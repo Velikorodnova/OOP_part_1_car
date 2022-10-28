@@ -2,64 +2,32 @@ package Transport;
 
 import java.time.LocalDate;
 
-public class Car {
-    private String brand;
-    private String model;
+public class Car extends Transport {
+
     double engineVolume;
-    private String color;
-    private int productionYear;
-    private String productionCountry;
     private String transmission;
     private String bodyType;
     private String registrationNumber;
     private int numberOfSeats;
     private static boolean summerTires;
 
-    public Car(String brand, String model, double engineVolume, String color, int productionYear,
-               String productionCountry, String transmission, String bodyType, String registrationNumber,
-               int numberOfSeats, boolean summerTires) {
-        this.brand = brand;
-        this.model = model;
+    public Car(String brand, String model, String color,
+               int productionYear, String productionCountry,
+               double engineVolume, String transmission,
+               String bodyType, String registrationNumber, int numberOfSeats, boolean summerTires) {
+        super(brand, model, color, productionYear, productionCountry);
         this.engineVolume = engineVolume;
-        this.color = color;
-        this.productionYear = productionYear;
-        this.productionCountry = productionCountry;
         this.transmission = transmission;
         this.bodyType = bodyType;
         this.registrationNumber = registrationNumber;
         this.numberOfSeats = numberOfSeats;
-        summerTires = summerTires;
 
-        if (model == null || model.isEmpty()) {
-            this.model = "default";
-        } else {
-            this.model = model;
-        }
-        if (brand == null || brand.isEmpty()) {
-            this.brand = "default";
-        } else {
-            this.brand = brand;
-        }
-        if (productionCountry == null || productionCountry.isEmpty()) {
-            this.productionCountry = "default";
-        } else {
-            this.productionYear = productionYear;
-        }
         if (engineVolume == 0) {
             this.engineVolume = 1.5;
         } else {
             this.engineVolume = engineVolume;
         }
-        if (color == null || color.isEmpty()) {
-            this.color = "Белый";
-        } else {
-            this.color = color;
-        }
-        if (productionYear == 0) {
-            this.productionYear = 2000;
-        } else {
-            this.productionYear = productionYear;
-        }
+
         if (transmission == null || transmission.isEmpty()) {
             this.transmission = "Механическая";
         } else {
@@ -83,22 +51,6 @@ public class Car {
 
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public int getProductionYear() {
-        return productionYear;
-    }
-
-    public String getProductionCountry() {
-        return productionCountry;
-    }
-
     public String getBodyType() {
         return bodyType;
     }
@@ -117,14 +69,6 @@ public class Car {
         } else {
             this.engineVolume = engineVolume;
         }
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public String getTransmission() {
@@ -161,7 +105,6 @@ public class Car {
         this.summerTires = currentMonth <= 10 && currentMonth >= 5;
     }
 
-
     public boolean correctRegistrationNumber() {
         if (registrationNumber.length() != 9) {
             return false;
@@ -180,20 +123,26 @@ public class Car {
     }
 
     public String toString() {
-        return "Бренд - " + brand +
-                ", Модель - " + model +
+        return super.toString() +
+
                 ", Объем двигателя - " + engineVolume +
-                ", Цвет - " + color +
-                ", Год выпуска - " + productionYear +
-                ", Страна сборки - " + productionCountry +
                 ", Коробка передач -  " + transmission +
                 ", Тип кузова - " + bodyType +
                 ", Регистрационный номер - " + registrationNumber +
                 ", Количество мест - " + numberOfSeats +
                 ", Шины - " + summerTires;
-
     }
 
+    @Override
+    public void refill() {
+        System.out.println("Нужно заправлять бензином, " +
+                "дизелем на заправке или " +
+                "заряжать на специальных электроду-парковках");
+    }
+
+
 }
+
+
 
 
